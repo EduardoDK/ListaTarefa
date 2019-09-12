@@ -82,6 +82,13 @@ public class MainActivity extends AppCompatActivity {
                         return false;
                     }
                 });
+              listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                  @Override
+                  public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                      mudaTarefa(tarefas.get(i));
+                      return;
+                  }
+              });
 
 
 
@@ -99,9 +106,10 @@ public class MainActivity extends AppCompatActivity {
     }
     public void salvarDado(View v){
 
-        Tarefa tarefa = new Tarefa(UUID.randomUUID().toString(), editTextNomeTarefa.getText().toString());
+        Tarefa tarefa = new Tarefa(UUID.randomUUID().toString(), editTextNomeTarefa.getText().toString(),false);
 
         databaseReference.child("tarefa").child(tarefa.getUuid()).setValue(tarefa);
+
         editTextNomeTarefa.setText("");
 
 
@@ -121,14 +129,43 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
         builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
             }
         });
+
+
+
+
         AlertDialog alert = builder.create();
         alert.show();
     }
+    public void mudaTarefa(final Tarefa tarefa){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle(R.string.app_name);
+        builder.setMessage("Você deseja mudar o status da tarefa ? ");
+        builder.setIcon(R.drawable.ic_launcher_background);
+        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                databaseReference.child("tarefa").child(tarefa.getStatus().toString(true));
+
+                listView.invalidateViews();
+            }
+        });
+        builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+    }
+
 
 }

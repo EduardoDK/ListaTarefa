@@ -4,7 +4,7 @@ public class Tarefa {
 
     private String uuid;
     private String nome;
-    private boolean status;
+    private Boolean status;
 
 
 
@@ -13,11 +13,11 @@ public class Tarefa {
 
     }
 
-    public Tarefa(String uuid, String nome) {
+    public Tarefa(String uuid, String nome, Boolean status) {
         this.uuid = uuid;
         this.nome = nome;
+        this.status = status;
     }
-
 
     public String getUuid() {
         return uuid;
@@ -35,11 +35,11 @@ public class Tarefa {
         this.nome = nome;
     }
 
-    public boolean isStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 
@@ -51,4 +51,6 @@ public class Tarefa {
                 ", status=" + status +
                 '}';
     }
+
+
 }

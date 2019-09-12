@@ -47,7 +47,22 @@ public class TarefaAdpter extends ArrayAdapter<Tarefa> {
         nomeTarefa.setText(tarefaAtual.getNome());
 
         TextView statusTarefa = listaItem.findViewById(R.id.text_view_status_tarefa);
-        statusTarefa.setText("     Não concluida");
+        statusTarefa.setText(tarefaAtual.getStatus().toString());
+
+
+
+
+        if(!tarefaAtual.getStatus()){
+            TextView concluir = listaItem.findViewById(R.id.text_view_status_tarefa);
+            concluir.setText("Falta Terminar");
+
+        }
+        else{
+            TextView concluir = listaItem.findViewById(R.id.text_view_status_tarefa);
+            concluir.setText("Concluido");
+
+
+        }
 
         return listaItem;
     }
