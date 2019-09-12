@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Todo Firebase</string>
+    <string name="btn">Inserir</string>
+    <string name="nome">Nome tarefa</string>
+</resources>
