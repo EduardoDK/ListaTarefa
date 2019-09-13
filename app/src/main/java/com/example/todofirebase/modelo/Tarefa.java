@@ -4,7 +4,9 @@ public class Tarefa {
 
     private String uuid;
     private String nome;
+    private String imageSrc = "https://image.flaticon.com/icons/png/512/1632/1632670.png";
     private Boolean status;
+
 
 
 
@@ -41,6 +43,18 @@ public class Tarefa {
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public Tarefa(String imageSrc) {
+        this.imageSrc = imageSrc;
+    }
+
+    public String getImageSrc() {
+        return imageSrc;
+    }
+
+    public void setImageSrc(String imageSrc) {
+        this.imageSrc = imageSrc;
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import androidx.annotation.Nullable;
 
 import com.example.todofirebase.R;
 import com.example.todofirebase.modelo.Tarefa;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,20 +51,34 @@ public class TarefaAdpter extends ArrayAdapter<Tarefa> {
         TextView statusTarefa = listaItem.findViewById(R.id.text_view_status_tarefa);
         statusTarefa.setText(tarefaAtual.getStatus().toString());
 
+        ImageView imagemTarefa = listaItem.findViewById(R.id.image_view_tarefa);
+        Picasso.get()
+                .load(tarefaAtual.getImageSrc())
+                .resize(70,70)
+                .centerCrop()
+                .into(imagemTarefa);
 
 
 
-        if(!tarefaAtual.getStatus()){
+        if(tarefaAtual.getStatus() == true){
+
             TextView concluir = listaItem.findViewById(R.id.text_view_status_tarefa);
-            concluir.setText("Falta Terminar");
+            concluir.setText("Concluída ");
+            concluir.setTextColor(context.getResources().getColor(R.color.Terminar));
 
         }
-        else{
-            TextView concluir = listaItem.findViewById(R.id.text_view_status_tarefa);
-            concluir.setText("Concluido");
 
+        else {
+
+            TextView concluir = listaItem.findViewById(R.id.text_view_status_tarefa);
+            concluir.setText("Não Concluída");
+            concluir.setTextColor(context.getResources().getColor(R.color.Falta));
 
         }
+
+
+
+
 
         return listaItem;
     }

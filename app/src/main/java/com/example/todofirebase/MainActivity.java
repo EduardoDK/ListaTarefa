@@ -79,17 +79,21 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                         excluirDado(tarefas.get(i));
+
                         return false;
                     }
                 });
               listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                   @Override
                   public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+
+
                       mudaTarefa(tarefas.get(i));
-                      return;
+
+                      return   ;
                   }
               });
-
 
 
 
@@ -106,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void salvarDado(View v){
 
-        Tarefa tarefa = new Tarefa(UUID.randomUUID().toString(), editTextNomeTarefa.getText().toString(),false);
+        Tarefa tarefa = new Tarefa(UUID.randomUUID().toString(),editTextNomeTarefa.getText().toString(),false );
 
         databaseReference.child("tarefa").child(tarefa.getUuid()).setValue(tarefa);
 
@@ -153,9 +157,30 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
-                databaseReference.child("tarefa").child(tarefa.getStatus().toString(true));
 
-                listView.invalidateViews();
+
+                if(tarefa.getStatus() == true){
+                    tarefa.setStatus(false);
+
+
+                }
+                else
+                    {
+
+                        tarefa.setStatus(true);
+
+
+                    }
+
+
+
+                databaseReference.child("tarefa").child(tarefa.getUuid()).setValue(tarefa);
+
+
+
+
+
+
             }
         });
         builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
@@ -164,6 +189,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        AlertDialog alert = builder.create();
+        alert.show();
 
     }
 
